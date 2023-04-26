@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0px;
+    box-sizing:border-box;
+}
+
+.logo {
+    width:8%;
+    height:8%;
+}
+
+.admin_img{
+    width: 100px;
+    object-fit: contain;
+}
+
+.light-b-btn button a{
+    background-color: rgb(50, 163, 255);
+    
+}
