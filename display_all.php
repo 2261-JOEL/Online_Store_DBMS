@@ -51,10 +51,13 @@ include('functions/common_function.php');
                             <a class="nav-link" href="#">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i><sup>1</sup></a>
+                            <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping"></i><sup><?php 
+                                cartItemNo();
+                                ?></sup></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Totat Price:</a>
+                            <a class="nav-link" href="#">Totat Price: <?php
+                                totalCartPrice(); ?>/-</a>
                         </li>
 
 
@@ -71,7 +74,7 @@ include('functions/common_function.php');
         <?php
         cart();        
         ?>
-        
+
         <!-- secondChild -->
         <nav class="navbar navbar-extend-lg" style="background-color: rgb(99, 119, 136);">
 

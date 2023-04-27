@@ -1,6 +1,7 @@
 <!-- connect file -->
 <?php
 include('includes/connect.php');
+include('functions/common_function.php');
 ?>
 
 <!DOCTYPE html>
@@ -38,10 +39,10 @@ include('includes/connect.php');
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Products</a>
+                            <a class="nav-link" href="display_all.php">Products</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Register</a>
@@ -50,21 +51,35 @@ include('includes/connect.php');
                             <a class="nav-link" href="#">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i><sup>1</sup></a>
+                            <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping"></i><sup>
+                                    <?php
+                                    cartItemNo();
+                                    ?>
+                                </sup></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Totat Price:</a>
+                            <a class="nav-link" href="#">Totat Price:
+                                <?php
+                                totalCartPrice(); ?>/-
+                            </a>
                         </li>
 
 
                     </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-light" type="submit">Search</button>
+                    <form class="d-flex" action="search_product.php" method="get" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                            name="search_data">
+
+                        <input class="btn btn-outline-light" type="submit" value="Search" name="search_data_product">
                     </form>
                 </div>
             </div>
         </nav>
+
+        <!-- calling cart function -->
+        <?php
+        cart();
+        ?>
         <!-- secondChild -->
         <nav class="navbar navbar-extend-lg" style="background-color: rgb(99, 119, 136);">
 
@@ -90,90 +105,18 @@ include('includes/connect.php');
             <!-- ProductsDisplay     -->
             <div class="col-md-10">
 
-                <div class="row">
-                    <div class="col-md-4 mb-2">
+                <div class="row px-1">
 
-                        <div class="card">
-                            <img src="Images/SamsungGalaxyM04.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Samsung Galaxy M04</h5>
-                                <p class="card-text">Samsung Galaxy M04 Dark Blue, 4GB RAM, 64GB Storage | Upto 8GB RAM
-                                    with RAM Plus | MediaTek Helio P35 Octa-core Processor | 5000 mAh Battery | 13MP
-                                    Dual Camera</p>
-                                <a href="#" class="btn btn-primary">Add to Cart</a>
-                                <a href="#" class="btn btn-secondary">View More</a>
-                            </div>
-                        </div>
+                    <!-- Fetching Products -->
+                    <?php
+                    // Calling functions
+                    getProducts();
+                    getUniqueCategories();
+                    getUniqueBrands();
 
-                    </div>
-                    <div class="col-md-4">
-
-                        <div class="card">
-                            <img src="Images/FastrackSmartWatch_1.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Fastrack Smart Watch</h5>
-                                <p class="card-text">Fastrack New Limitless FS1 Smart Watch|Biggest 1.95" Horizon Curve
-                                    Display|SingleSync BT Calling v5.3|Built-in Alexa|Upto 7 Day Battery|ATS Chipset
-                                    with Zero Lag|100+ Sports Modes|150+ Watchfaces</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                    <div class="col-md-4">
-
-                        <div class="card">
-                            <img src="Images/VW_LED_TV_1.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-4">
-
-                        <div class="card">
-                            <img src="Images/VW_LED_TV_1.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-
-                        <div class="card">
-                            <img src="Images/VW_LED_TV_1.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-
-                        <div class="card">
-                            <img src="Images/VW_LED_TV_1.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
+                    // $ip = getIPAddress();
+                    // echo 'User Real IP Address - ' . $ip;
+                    ?>
 
                 </div>
 
@@ -191,19 +134,8 @@ include('includes/connect.php');
                     </li>
 
                     <?php
-                    $select_brands = "select * from `brands`";
-                    $result_brands = mysqli_query($con, $select_brands);
-                    // $row_data = mysqli_fetch_assoc($result_brands);
-                    // echo $row_data['brand_title'];
-                    while ($row_data = mysqli_fetch_assoc($result_brands)) {
-                        $brand_title = $row_data['brand_title'];
-                        $brand_id = $row_data['brand_id'];
-                        // echo $brand_title;
-                        echo "<li class='nav-item'>
-                        <a href='index.php?brand=$brand_id' class='nav-link text-light'>$brand_title
-                        </a>
-                    </li>";
-                    }
+                    // Calling function: getBrands
+                    getBrands();
                     ?>
 
                 </ul>
@@ -218,19 +150,8 @@ include('includes/connect.php');
 
 
                     <?php
-                    $select_categories = "select * from `categories`";
-                    $result_categories = mysqli_query($con, $select_categories);
-
-
-                    while ($row_data = mysqli_fetch_assoc($result_categories)) {
-                        $category_title = $row_data['category_title'];
-                        $category_id = $row_data['category_id'];
-
-                        echo "<li class='nav-item'>
-                        <a href='index.php?category=$category_id' class='nav-link text-light'>$category_title
-                        </a>
-                    </li>";
-                    }
+                    //   Calling function: getCategories
+                    getCategories();
                     ?>
 
                 </ul>

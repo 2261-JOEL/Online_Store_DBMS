@@ -38,7 +38,7 @@ if (isset($_POST['insert_cat'])) {
 
     <div class="input-group w-10 mb-2 m-auto">
 
-        <input type="submit" class=" bg-primary text-light p-2 my-3 border-0" name="insert_cat" value="Insert Category" required>
+        <input type="submit" class="rounded bg-primary text-light p-2 my-3 border-0" name="insert_cat" value="Insert Category" required>
 
 
 
