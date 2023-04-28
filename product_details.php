@@ -2,6 +2,7 @@
 <?php
 include('includes/connect.php');
 include('functions/common_function.php');
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +21,11 @@ include('functions/common_function.php');
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- CSS File -->
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+    </style>
     <link rel="stylesheet" href="style.css">
 
 </head>
@@ -51,13 +57,17 @@ include('functions/common_function.php');
                             <a class="nav-link" href="#">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping"></i><sup><?php 
-                                cartItemNo();
-                                ?></sup></a>
+                            <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping"></i><sup>
+                                    <?php
+                                    cartItemNo();
+                                    ?>
+                                </sup></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Totat Price: <?php
-                                totalCartPrice(); ?>/-</a>
+                            <a class="nav-link" href="#">Totat Price:
+                                <?php
+                                totalCartPrice(); ?>/-
+                            </a>
                         </li>
 
 
@@ -74,19 +84,39 @@ include('functions/common_function.php');
 
         <!-- calling cart function -->
         <?php
-        cart();        
+        cart();
         ?>
 
         <!-- secondChild -->
         <nav class="navbar navbar-extend-lg" style="background-color: rgb(99, 119, 136);">
 
             <ul class="">
+            <?php
+                if (!isset($_SESSION['username'])) {
+                    echo "<li class='nav-item' style='display:inline-block;'>
+                            <a class='nav-link text-warning fw-bold' href='#'>Welcome Guest</a>
+                        </li>";
+                } else {
+                    echo "<li class='nav-item' style='display:inline-block;'>
+                        <a class='nav-link text-warning fw-bold' href='#'>Welcome, ".$_SESSION['username']."</a>
+                    </li>";
+                }
+                ?>
                 <li class="nav-item" style="display:inline-block;">
-                    <a class="nav-link" href="#">Welcome Guest</a>
+                    <p class="nav-link">&nbsp|&nbsp</p>
                 </li>
-                <li class="nav-item" style="display:inline-block;">
-                    <a class="nav-link" href="#">Login</a>
-                </li>
+                <?php
+                if (!isset($_SESSION['username'])) {
+                    echo "<li class='nav-item' style='display:inline-block;'>
+                    <a class='nav-link text-light' href='./user_area/user_login.php'>Login</a>
+                </li>";
+
+                } else {
+                    echo "<li class='nav-item' style='display:inline-block;'>
+                    <a class='nav-link text-light' href='./user_area/logout.php'>Logout</a>
+                </li>";
+                }
+                ?>
             </ul>
 
         </nav>
@@ -103,9 +133,9 @@ include('functions/common_function.php');
             <div class="col-md-10">
 
                 <div class="row px-1">
-                    
 
-                    
+
+
 
                     <!-- Fetching Products -->
                     <?php

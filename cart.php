@@ -2,6 +2,7 @@
 <?php
 include('includes/connect.php');
 include('functions/common_function.php');
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +29,11 @@ include('functions/common_function.php');
             height: 80px;
             object-fit: contain;
         }
+
+
+        body {
+            overflow-x: hidden;
+        }
     </style>
 
 </head>
@@ -53,7 +59,7 @@ include('functions/common_function.php');
                             <a class="nav-link" href="display_all.php">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Register</a>
+                            <a class="nav-link" href="./user_area/user_registration.php">Register</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Contact</a>
@@ -92,15 +98,32 @@ include('functions/common_function.php');
         <nav class="navbar navbar-extend-lg" style="background-color: rgb(99, 119, 136);">
 
             <ul class="">
-            <li class="nav-item" style="display:inline-block;">
-                    <a class="nav-link text-warning fw-bold" href="#">Welcome Guest</a>
-                </li>
+            <?php
+                if (!isset($_SESSION['username'])) {
+                    echo "<li class='nav-item' style='display:inline-block;'>
+                            <a class='nav-link text-warning fw-bold' href='#'>Welcome Guest</a>
+                        </li>";
+                } else {
+                    echo "<li class='nav-item' style='display:inline-block;'>
+                        <a class='nav-link text-warning fw-bold' href='#'>Welcome, ".$_SESSION['username']."</a>
+                    </li>";
+                }
+                ?>
                 <li class="nav-item" style="display:inline-block;">
-                    <p class="nav-link" >&nbsp|&nbsp</p>
+                    <p class="nav-link">&nbsp|&nbsp</p>
                 </li>
-                <li class="nav-item" style="display:inline-block;">
-                    <a class="nav-link text-light" href="./user_area/user_login.php">Login</a>
-                </li>
+                <?php
+                if (!isset($_SESSION['username'])) {
+                    echo "<li class='nav-item' style='display:inline-block;'>
+                    <a class='nav-link text-light' href='./user_area/user_login.php'>Login</a>
+                </li>";
+
+                } else {
+                    echo "<li class='nav-item' style='display:inline-block;'>
+                    <a class='nav-link text-light' href='./user_area/logout.php'>Logout</a>
+                </li>";
+                }
+                ?>
             </ul>
 
         </nav>
@@ -282,10 +305,11 @@ include('functions/common_function.php');
 
 
 
-        <!-- lastChild (Footer) -->
-        <div class="p-3 text-center container-fluid" style="background-color: rgb(50, 163, 255);">
-            <p>All Rights Reserved © - Designed By Team RJS - 2023</p>
-        </div>
+
+    </div>
+    <!-- lastChild (Footer) -->
+    <div class="p-3 text-center container-fluid" style="background-color: rgb(50, 163, 255);">
+        <p>All Rights Reserved © - Designed By Team RJS - 2023</p>
     </div>
 
 

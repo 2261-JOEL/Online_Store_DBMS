@@ -79,7 +79,7 @@ include('../functions/common_function.php');
                 <!-- contact field     -->
                 <div class="form-outline mb-4 w-50 m-auto">
                     <label for="user_contact " class="form-label">Mobile No.</label>
-                    <input type="text" id="user_contact" class="form-control" placeholder="Enter Your Mobile No."
+                    <input type="tel" id="user_contact" class="form-control" placeholder="Enter Your Mobile No."
                         autocomplete="off" required name="user_contact">
                 </div>
 
@@ -106,6 +106,7 @@ if (isset($_POST['user_register'])) {
     $user_username = $_POST['user_username'];
     $user_email = $_POST['user_email'];
     $user_password = $_POST['user_password'];
+    $hash_password = password_hash($user_password, PASSWORD_DEFAULT);
     $conf_user_password = $_POST['conf_user_password'];
     $user_address = $_POST['user_address'];
     $user_contact = $_POST['user_contact'];
@@ -113,20 +114,52 @@ if (isset($_POST['user_register'])) {
     $user_image_tmp = $_FILES['user_image']['tmp_name'];
     $user_ip = getIPAddress();
 
-    // moving uploaded files to temp folder
-    move_uploaded_file($user_image_tmp,"./user_images/$user_image");
 
-    // insert query
-    $insert_query = "insert into `users` (username,user_email,user_password,user_image,user_ip,user_address,user_mobile) values('$user_username','$user_email','$user_password','$user_image','$user_ip','$user_address','$user_contact')";
-    $sql_execute = mysqli_query($con, $insert_query);
+    // select query
+    $select_query = "select * from `users` where username='$user_username' or user_email='$user_email'";
+    $result = mysqli_query($con, $select_query);
+    $rows_count = mysqli_num_rows($result);
 
-    if($sql_execute){
-        echo "<script>alert('User: $user_username Registered Successfully!')</script>";
+    if ($rows_count > 0) {
+        echo "<script>alert('ALER!! User: [ $user_username ] has already registered!!')</script>";
+    } else if ($user_password != $conf_user_password) {
+        echo "<script>alert('ALER!! The passwords do not match. Please re-enter your password.')</script>";
 
+
+    } else {
+        // moving uploaded files to temp folder
+        move_uploaded_file($user_image_tmp, "./user_images/$user_image");
+        // insert query
+        $insert_query = "insert into `users` (username,user_email,user_password,user_image,user_ip,user_address,user_mobile) values('$user_username','$user_email','$hash_password','$user_image','$user_ip','$user_address','$user_contact')";
+        $sql_execute = mysqli_query($con, $insert_query);
+
+        if ($sql_execute) {
+            echo "<script>alert('User: $user_username Registered Successfully!')</script>";
+
+        } else {
+            die(mysqli_error($con));
+        }
+
+    }
+
+    // selecting cart items
+    $select_cart_items = "select * from `cart_details` where ip_address='$user_ip'";
+    $result_cart = mysqli_query($con, $select_cart_items);
+    $rows_count = mysqli_num_rows($result_cart);
+
+    if ($rows_count > 0) {
+        $_SESSION['username']=$user_username;
+
+        echo "<script>alert('You have items in your cart !')</script>";
+        echo "<script>window.open('checkout.php','_self')</script>";
+        
     }
     else{
-        die(mysqli_error($con));
+        echo "<script>window.open('../index.php','_self')</script>";
+
     }
+
+
 
 }
 
