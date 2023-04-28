@@ -92,11 +92,14 @@ include('functions/common_function.php');
         <nav class="navbar navbar-extend-lg" style="background-color: rgb(99, 119, 136);">
 
             <ul class="">
-                <li class="nav-item" style="display:inline-block;">
-                    <a class="nav-link" href="#">Welcome Guest</a>
+            <li class="nav-item" style="display:inline-block;">
+                    <a class="nav-link text-warning fw-bold" href="#">Welcome Guest</a>
                 </li>
                 <li class="nav-item" style="display:inline-block;">
-                    <a class="nav-link" href="#">Login</a>
+                    <p class="nav-link" >&nbsp|&nbsp</p>
+                </li>
+                <li class="nav-item" style="display:inline-block;">
+                    <a class="nav-link text-light" href="./user_area/user_login.php">Login</a>
                 </li>
             </ul>
 
@@ -234,7 +237,7 @@ include('functions/common_function.php');
                         name='continue_shopping' value='Continue Shopping'>
                         
                         <button
-                            class='bg-secondary rounded px-3 py-2 border-0 text-light'><a href='checkout.php' class='text-light text-decoration-none'>Checkout</a></button>";
+                            class='bg-secondary rounded px-3 py-2 border-0 text-light'><a href='./user_area/checkout.php' class='text-light text-decoration-none'>Checkout</a></button>";
 
                         } else {
                             echo "<input class='bg-primary mx-3 rounded px-3 py-2 border-0 text-light' type='submit'

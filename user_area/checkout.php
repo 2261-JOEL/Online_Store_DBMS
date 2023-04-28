@@ -1,7 +1,7 @@
 <!-- connect file -->
 <?php
-include('includes/connect.php');
-include('functions/common_function.php');
+include('../includes/connect.php');
+// include('functions/common_function.php');
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +11,7 @@ include('functions/common_function.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Shopping Website</title>
+    <title>Checkout Page</title>
     <!-- Bootstrap CSS link -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -20,7 +20,7 @@ include('functions/common_function.php');
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- CSS File -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 
 </head>
 
@@ -30,7 +30,7 @@ include('functions/common_function.php');
         <!-- firstChild (Navbar) -->
         <nav class="navbar navbar-expand-lg " style="background-color: rgb(50, 163, 255);">
             <div class="container-fluid">
-                <img src="Images/logo.png" alt="logo" class="logo">
+                <img src="../Images/logo.png" alt="logo" class="logo">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -39,10 +39,10 @@ include('functions/common_function.php');
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                            <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="display_all.php">Products</a>
+                            <a class="nav-link" href="../display_all.php">Products</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Register</a>
@@ -50,20 +50,13 @@ include('functions/common_function.php');
                         <li class="nav-item">
                             <a class="nav-link" href="#">Contact</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="cart.php"><i class="fa-solid fa-cart-shopping"></i><sup><?php 
-                                cartItemNo();
-                                ?></sup></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Totat Price: <?php
-                                totalCartPrice(); ?>/-</a>
-                        </li>
+
 
 
                     </ul>
-                    <form class="d-flex" action="search_product.php" method="get" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_data">
+                    <form class="d-flex" action="../search_product.php" method="get" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                            name="search_data">
 
                         <input class="btn btn-outline-light" type="submit" value="Search" name="search_data_product">
                     </form>
@@ -72,22 +65,16 @@ include('functions/common_function.php');
         </nav>
 
         <!-- calling cart function -->
-        <?php
-        cart();        
-        ?>
 
         <!-- secondChild -->
         <nav class="navbar navbar-extend-lg" style="background-color: rgb(99, 119, 136);">
 
             <ul class="">
-            <li class="nav-item" style="display:inline-block;">
-                    <a class="nav-link text-warning fw-bold" href="#">Welcome Guest</a>
+                <li class="nav-item" style="display:inline-block;">
+                    <a class="nav-link" href="#">Welcome Guest</a>
                 </li>
                 <li class="nav-item" style="display:inline-block;">
-                    <p class="nav-link" >&nbsp|&nbsp</p>
-                </li>
-                <li class="nav-item" style="display:inline-block;">
-                    <a class="nav-link text-light" href="./user_area/user_login.php">Login</a>
+                    <a class="nav-link" href="user_login.php">Login</a>
                 </li>
             </ul>
 
@@ -102,58 +89,27 @@ include('functions/common_function.php');
         <!-- fourthChild (Product + SideNavBar) -->
         <div class="row p-2">
             <!-- ProductsDisplay     -->
-            <div class="col-md-10">
+            <div class="col-md-12">
 
                 <div class="row px-1">
-
-                    <!-- Fetching Products -->
                     <?php
-                    // Calling function: getProducts
-                    search_product();
-                    getUniqueCategories();
-                    getUniqueBrands();
+                    if (!isset($_SESSION['username'])) {
+                        include('user_login.php');
+
+
+                    } else {
+                        include('payment.php');
+
+                    }
                     ?>
+
+
 
                 </div>
 
             </div>
 
-            <!-- SideNavbar -->
-            <div class="col-md-2 bg-secondary p-0">
 
-                <!-- Display Brands     -->
-                <ul class="navbar-nav me-auto text-center">
-                    <li class="nav-item " style="background-color: rgb(50, 163, 255);">
-                        <a href="#" class="nav-link text-light">
-                            <h4>Brands</h4>
-                        </a>
-                    </li>
-
-                    <?php
-                    // Calling function: getBrands
-                    getBrands();
-                    ?>
-
-                </ul>
-
-                <!-- Display Cateogories -->
-                <ul class="navbar-nav me-auto text-center">
-                    <li class="nav-item " style="background-color: rgb(50, 163, 255);">
-                        <a href="#" class="nav-link text-light">
-                            <h4>Categories</h4>
-                        </a>
-                    </li>
-
-
-                    <?php
-                    //   Calling function: getCategories
-                    getCategories();
-                    ?>
-
-                </ul>
-
-
-            </div>
 
 
         </div>

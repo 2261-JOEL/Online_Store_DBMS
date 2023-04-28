@@ -85,10 +85,13 @@ include('functions/common_function.php');
 
             <ul class="">
                 <li class="nav-item" style="display:inline-block;">
-                    <a class="nav-link" href="#">Welcome Guest</a>
+                    <a class="nav-link text-warning fw-bold" href="#">Welcome Guest</a>
                 </li>
                 <li class="nav-item" style="display:inline-block;">
-                    <a class="nav-link" href="#">Login</a>
+                    <p class="nav-link" >&nbsp|&nbsp</p>
+                </li>
+                <li class="nav-item" style="display:inline-block;">
+                    <a class="nav-link text-light" href="./user_area/user_login.php">Login</a>
                 </li>
             </ul>
 

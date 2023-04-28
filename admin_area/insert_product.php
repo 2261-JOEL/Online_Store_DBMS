@@ -66,8 +66,13 @@ if (isset($_POST['insert_product'])) {
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- CSS File -->
-    <link rel="stylesheet" href="inspro_style.css">
+    <!-- CSS -->
+    <style>
+        body {
+            background-color: rgb(157, 211, 255);
+        }
+    </style>
+
 </head>
 
 <body class="">

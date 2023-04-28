@@ -62,9 +62,11 @@ include('functions/common_function.php');
 
 
                     </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-light" type="submit">Search</button>
+                    <form class="d-flex" action="search_product.php" method="get" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                            name="search_data">
+
+                        <input class="btn btn-outline-light" type="submit" value="Search" name="search_data_product">
                     </form>
                 </div>
             </div>
@@ -79,11 +81,14 @@ include('functions/common_function.php');
         <nav class="navbar navbar-extend-lg" style="background-color: rgb(99, 119, 136);">
 
             <ul class="">
-                <li class="nav-item" style="display:inline-block;">
-                    <a class="nav-link" href="#">Welcome Guest</a>
+            <li class="nav-item" style="display:inline-block;">
+                    <a class="nav-link text-warning fw-bold" href="#">Welcome Guest</a>
                 </li>
                 <li class="nav-item" style="display:inline-block;">
-                    <a class="nav-link" href="#">Login</a>
+                    <p class="nav-link" >&nbsp|&nbsp</p>
+                </li>
+                <li class="nav-item" style="display:inline-block;">
+                    <a class="nav-link text-light" href="./user_area/user_login.php">Login</a>
                 </li>
             </ul>
 
