@@ -50,9 +50,24 @@ session_start();
                         <li class="nav-item">
                             <a class="nav-link" href="display_all.php">Products</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./user_area/user_registration.php">Register</a>
+
+                        <?php
+                        if (isset($_SESSION['username'])) {
+                            echo "
+                            <li class='nav-item'>
+                            <a class='nav-link' href='./user_area/profile.php'>My Account</a>
                         </li>
+                            ";
+                        } else {
+                            echo "
+                            <li class='nav-item'>
+                            <a class='nav-link' href='./user_area/user_registration.php'>Register</a>
+                        </li>
+                            ";
+                        }
+
+                        ?>
+                        
                         <li class="nav-item">
                             <a class="nav-link" href="#">Contact</a>
                         </li>
@@ -97,7 +112,7 @@ session_start();
                         </li>";
                 } else {
                     echo "<li class='nav-item' style='display:inline-block;'>
-                        <a class='nav-link text-warning fw-bold' href='#'>Welcome, ".$_SESSION['username']."</a>
+                        <a class='nav-link text-warning fw-bold' href='#'>Welcome, " . $_SESSION['username'] . "</a>
                     </li>";
                 }
                 ?>
@@ -118,7 +133,7 @@ session_start();
                 </li>";
                 }
                 ?>
-                
+
             </ul>
 
         </nav>
