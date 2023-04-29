@@ -50,9 +50,22 @@ session_start();
                         <li class="nav-item">
                             <a class="nav-link" href="display_all.php">Products</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./user_area/user_registration.php">Register</a>
+                        <?php
+                        if (isset($_SESSION['username'])) {
+                            echo "
+                            <li class='nav-item'>
+                            <a class='nav-link' href='./user_area/profile.php'>My Account</a>
                         </li>
+                            ";
+                        } else {
+                            echo "
+                            <li class='nav-item'>
+                            <a class='nav-link' href='./user_area/user_registration.php'>Register</a>
+                        </li>
+                            ";
+                        }
+
+                        ?>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Contact</a>
                         </li>
@@ -70,7 +83,7 @@ session_start();
                     </ul>
                     <form class="d-flex" action="search_product.php" method="get" role="search">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                            name="search_data">
+                            name="search_data" autocomplete="off">
 
                         <input class="btn btn-outline-light" type="submit" value="Search" name="search_data_product">
                     </form>
